@@ -1,6 +1,7 @@
 package me.vortexgames.vtgbot;
 
 import me.vortexgames.vtgbot.commands.SayCommand;
+import me.vortexgames.vtgbot.commands.TicketCommand;
 import me.vortexgames.vtgbot.listeners.AddReaction;
 import me.vortexgames.vtgbot.listeners.WelkomMessage;
 import net.dv8tion.jda.core.AccountType;
@@ -23,6 +24,7 @@ public class Main {
         jda.addEventListener(new WelkomMessage());
         jda.addEventListener(new AddReaction());
         jda.addEventListener(new SayCommand());
+        jda.addEventListener(new TicketCommand());
 //        jda.addEventListener(new LeadMentionBlock());
     }
 
