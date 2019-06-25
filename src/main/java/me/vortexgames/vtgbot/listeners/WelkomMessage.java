@@ -23,7 +23,7 @@ public class WelkomMessage extends ListenerAdapter {
 
         welkomEmbed.setAuthor("Er is een gebruiker gejoined");
         welkomEmbed.setColor(Color.BLUE);
-        welkomEmbed.setDescription("Welkom " + user.getName() + " op de VortexGames discord! Check even onze channels voor informatie!\nEn neem een kijkje op de server: **play.viortexgames.nl**");
+        welkomEmbed.setDescription("Welkom " + user.getName() + " op de VortexGames discord! Check even onze channels voor informatie!\nEn neem een kijkje op de server: **play.vortexgames.nl**");
         welkomEmbed.setFooter("Member joined", guild.getIconUrl());
 
         textChannel.sendTyping().queue();
