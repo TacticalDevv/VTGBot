@@ -1,17 +1,16 @@
 package me.vortexgames.vtgbot;
 
+import me.vortexgames.vtgbot.commands.SayCommand;
+import me.vortexgames.vtgbot.commands.TicketCommand;
+import me.vortexgames.vtgbot.listeners.AddReaction;
 import me.vortexgames.vtgbot.listeners.WelkomMessage;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
-import java.awt.*;
-import java.util.Random;
 
 public class Main {
 
@@ -19,49 +18,25 @@ public class Main {
 
     // LINK: https://discordapp.com/oauth2/authorize?client_id=593076297715154954&scope=bot&permissions=2146958847
 
-    private static final Random random = new Random();
+    public static void main(String[] main) throws LoginException, InterruptedException {
+        startBot();
 
-    private Main() {
-
-        CommandManager commandManager = new CommandManager(random);
-        Listener listener = new Listener(commandManager);
-        Logger logger = LoggerFactory.getLogger(Main.class);
-
-//        WebUtils.setUserAgent();
-
-//        EmbedUtils.setEmbedBuilder(
-//                () -> new EmbedBuilder()
-//                        .setColor(getRandomColor())
-//                        .setFooter("{MenuDocs}", null)
-//                        .setTimestamp(Instant.now())
-//        );
-
-
-        try {
-            logger.info("Booting");
-            new JDABuilder(AccountType.BOT)
-                    .setToken("NTkzMDc2Mjk3NzE1MTU0OTU0.XRIngQ.jSp7W7fbBUhcC69QaS6-G2HAM0U")
-                    .setGame(Game.playing("play.vortexgames.nl"))
-                    .addEventListener(listener).addEventListener(new WelkomMessage())
-                    .build().awaitReady();
-            logger.info("Running");
-        } catch (InterruptedException | LoginException e) {
-            e.printStackTrace();
-        }
+        jda.addEventListener(new WelkomMessage());
+        jda.addEventListener(new AddReaction());
+        jda.addEventListener(new SayCommand());
+        jda.addEventListener(new TicketCommand());
+//        jda.addEventListener(new LeadMentionBlock());
     }
 
-    public static Color getRandomColor() {
-        float r = random.nextFloat();
-        float g = random.nextFloat();
-        float b = random.nextFloat();
+    private static void startBot() throws LoginException, InterruptedException {
+        // TODO start bot
+        jda = new JDABuilder(AccountType.BOT).setToken("NTkzMDc2Mjk3NzE1MTU0OTU0.XRIngQ.jSp7W7fbBUhcC69QaS6-G2HAM0U").buildBlocking();
 
-        return new Color(r, g, b);
+        jda.getPresence().setGame(Game.playing("play.vortexgames.nl"));
+        jda.getPresence().setStatus(OnlineStatus.ONLINE);
+        jda.setAutoReconnect(true);
+        System.out.print("De bot is opgestart!!");
     }
-
-    public static void main(String[] args) {
-        new Main();
-    }
-
 
     public static JDA getJda() {
         return jda;
