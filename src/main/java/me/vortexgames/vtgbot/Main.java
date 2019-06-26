@@ -30,7 +30,7 @@ public class Main {
 
     private static void startBot() throws LoginException, InterruptedException {
         // TODO start bot
-        jda = new JDABuilder(AccountType.BOT).setToken("NTkzMDc2Mjk3NzE1MTU0OTU0.XRIngQ.jSp7W7fbBUhcC69QaS6-G2HAM0U").buildBlocking();
+        jda = new JDABuilder(AccountType.BOT).setToken("TOKEN").buildBlocking();
 
         jda.getPresence().setGame(Game.playing("play.vortexgames.nl"));
         jda.getPresence().setStatus(OnlineStatus.ONLINE);
